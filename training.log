@@ -1,0 +1,367 @@
+nohup: ignoring input
+2026-05-22 06:37:01,877 [INFO] Device: cpu
+2026-05-22 06:37:01,889 [INFO] RNA-seq:    (96, 16622)  labels: [13 83]
+2026-05-22 06:37:01,890 [INFO] Microarray: (59, 16622)  labels: [18 41]
+2026-05-22 06:37:01,899 [INFO] Microarray Training Set: 36 campioni  labels: [12 24]
+2026-05-22 06:37:01,899 [INFO] Microarray Test Set (mai toccato fino alla fine): 23 campioni  labels: [ 6 17]
+2026-05-22 06:37:02,007 [INFO] Augmentation: 83 R → 498 R  (NR nel dataset ma non usati per prototype: 13)
+2026-05-22 06:37:02,022 [INFO] 
+==================================================
+Autoencoder pretraining — microarray
+==================================================
+2026-05-22 06:37:02,677 [INFO]   [microarray] Epoch    1/500  MSE: 0.8262  lr: 1.00e-03
+2026-05-22 06:37:06,875 [INFO]   [microarray] Epoch  100/500  MSE: 0.2896  lr: 9.05e-04
+2026-05-22 06:37:11,225 [INFO]   [microarray] Epoch  200/500  MSE: 0.1896  lr: 6.58e-04
+2026-05-22 06:37:15,083 [INFO]   [microarray] Epoch  300/500  MSE: 0.1305  lr: 3.52e-04
+2026-05-22 06:37:18,823 [INFO]   [microarray] Epoch  400/500  MSE: 0.1189  lr: 1.05e-04
+2026-05-22 06:37:22,680 [INFO]   [microarray] Epoch  500/500  MSE: 0.1074  lr: 1.00e-05
+2026-05-22 06:37:22,715 [INFO] 
+==================================================
+Autoencoder pretraining — rnaseq
+==================================================
+2026-05-22 06:37:22,811 [INFO]   [rnaseq] Epoch    1/500  MSE: 1.0042  lr: 1.00e-03
+2026-05-22 06:37:31,755 [INFO]   [rnaseq] Epoch  100/500  MSE: 0.4417  lr: 9.05e-04
+2026-05-22 06:37:40,877 [INFO]   [rnaseq] Epoch  200/500  MSE: 0.2652  lr: 6.58e-04
+2026-05-22 06:37:50,312 [INFO]   [rnaseq] Epoch  300/500  MSE: 0.1693  lr: 3.52e-04
+2026-05-22 06:37:59,147 [INFO]   [rnaseq] Epoch  400/500  MSE: 0.1304  lr: 1.05e-04
+2026-05-22 06:38:08,619 [INFO]   [rnaseq] Epoch  500/500  MSE: 0.1225  lr: 1.00e-05
+2026-05-22 06:38:08,682 [INFO]   Caricati pesi encoder pretrained RNA-seq
+2026-05-22 06:38:08,703 [INFO]   Centroide iniziale calcolato su 498 responder RNA-seq
+2026-05-22 06:38:08,703 [INFO] 
+==================================================
+Stage 3: ProtoDANN training iniziale
+==================================================
+2026-05-22 06:38:08,703 [INFO] 
+  --- ProtoDANN iniziale ---
+2026-05-22 06:38:08,703 [INFO]   RNA responder train: (511, 16622)  R: 498  NR: 13
+2026-05-22 06:38:09,494 [INFO]   Epoch    1/1000  α=0.00  dom=21.8580  proto=10.3388  val_AUC=0.4444  best=0.4444@1
+2026-05-22 06:42:02,661 [INFO]   Epoch  100/1000  α=0.46  dom=21.7966  proto=0.5229  val_AUC=0.4722  best=0.6285@13
+2026-05-22 06:44:56,280 [INFO]   Early stopping a epoch 163
+2026-05-22 06:44:56,280 [INFO]   Best epoch: 13  val_AUC: 0.6285
+2026-05-22 06:44:56,286 [INFO]   [mic_train [round 0]] AUC: 0.6285  score_R: 0.921  score_NR: 0.918
+2026-05-22 06:44:56,286 [INFO] 
+==================================================
+Stage 4: Self-training (20 rounds)
+==================================================
+2026-05-22 06:44:56,286 [INFO]   Strategia: campioni microarray vicini al centroide raffinano il prototipo
+2026-05-22 06:44:56,287 [INFO]   Test set (23 campioni): NON toccato
+2026-05-22 06:44:56,287 [INFO] 
+  === Round 1/20 ===
+2026-05-22 06:44:56,288 [INFO]   Candidati mic responder: 14  score range: [0.924, 0.940]
+2026-05-22 06:44:58,492 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 06:44:58,493 [INFO] 
+  --- ST round 1 ---
+2026-05-22 06:44:58,493 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 06:45:01,185 [INFO]   Epoch    1/500  α=0.01  dom=25.0555  proto=6.2691  val_AUC=0.6111  best=0.6111@1
+2026-05-22 06:48:58,235 [INFO]   Epoch  100/500  α=0.76  dom=22.4377  proto=0.8237  val_AUC=0.6042  best=0.7431@22
+2026-05-22 06:49:22,787 [INFO]   Early stopping a epoch 172
+2026-05-22 06:49:22,787 [INFO]   Best epoch: 22  val_AUC: 0.7431
+2026-05-22 06:49:22,791 [INFO]   [mic_train [round 1]] AUC: 0.7431  score_R: 0.966  score_NR: 0.954
+2026-05-22 06:49:22,791 [INFO]   ✓ Nuovo best round: 1  AUC=0.7431
+2026-05-22 06:49:22,792 [INFO] 
+  === Round 2/20 ===
+2026-05-22 06:49:22,793 [INFO]   Candidati mic responder: 14  score range: [0.970, 0.984]
+2026-05-22 06:49:22,798 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 06:49:22,798 [INFO] 
+  --- ST round 2 ---
+2026-05-22 06:49:22,798 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 06:49:23,486 [INFO]   Epoch    1/500  α=0.01  dom=24.3048  proto=1.2110  val_AUC=0.7465  best=0.7465@1
+2026-05-22 06:50:47,657 [INFO]   Epoch  100/500  α=0.76  dom=22.4338  proto=0.3284  val_AUC=0.6910  best=0.7465@1
+2026-05-22 06:51:30,878 [INFO]   Early stopping a epoch 151
+2026-05-22 06:51:30,878 [INFO]   Best epoch: 1  val_AUC: 0.7465
+2026-05-22 06:51:30,882 [INFO]   [mic_train [round 2]] AUC: 0.7465  score_R: 0.971  score_NR: 0.957
+2026-05-22 06:51:30,882 [INFO]   ✓ Nuovo best round: 2  AUC=0.7465
+2026-05-22 06:51:30,883 [INFO] 
+  === Round 3/20 ===
+2026-05-22 06:51:30,884 [INFO]   Candidati mic responder: 14  score range: [0.977, 0.987]
+2026-05-22 06:51:30,887 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 06:51:30,887 [INFO] 
+  --- ST round 3 ---
+2026-05-22 06:51:30,887 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 06:51:31,561 [INFO]   Epoch    1/500  α=0.01  dom=23.5407  proto=1.0435  val_AUC=0.7361  best=0.7361@1
+2026-05-22 06:52:46,006 [INFO]   Epoch  100/500  α=0.76  dom=22.3507  proto=0.3610  val_AUC=0.7188  best=0.7604@68
+2026-05-22 06:53:32,746 [INFO]   Epoch  200/500  α=0.96  dom=22.1973  proto=0.1502  val_AUC=0.7778  best=0.7986@195
+2026-05-22 06:54:54,968 [INFO]   Epoch  300/500  α=1.00  dom=22.1614  proto=0.0955  val_AUC=0.7812  best=0.7986@195
+2026-05-22 06:56:15,025 [INFO]   Epoch  400/500  α=1.00  dom=22.1916  proto=0.0715  val_AUC=0.8056  best=0.8090@332
+2026-05-22 06:57:22,098 [INFO]   Epoch  500/500  α=1.00  dom=22.1806  proto=0.0652  val_AUC=0.8021  best=0.8125@401
+2026-05-22 06:57:22,098 [INFO]   Best epoch: 401  val_AUC: 0.8125
+2026-05-22 06:57:22,102 [INFO]   [mic_train [round 3]] AUC: 0.8125  score_R: 0.999  score_NR: 0.994
+2026-05-22 06:57:22,103 [INFO]   ✓ Nuovo best round: 3  AUC=0.8125
+2026-05-22 06:57:22,103 [INFO] 
+  === Round 4/20 ===
+2026-05-22 06:57:22,104 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 06:57:22,107 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 06:57:22,107 [INFO] 
+  --- ST round 4 ---
+2026-05-22 06:57:22,107 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 06:57:22,501 [INFO]   Epoch    1/500  α=0.01  dom=22.1818  proto=0.0755  val_AUC=0.8090  best=0.8090@1
+2026-05-22 06:58:03,083 [INFO]   Epoch  100/500  α=0.76  dom=22.1797  proto=0.0119  val_AUC=0.7743  best=0.8160@9
+2026-05-22 06:58:47,373 [INFO]   Epoch  200/500  α=0.96  dom=22.1830  proto=0.0006  val_AUC=0.5000  best=0.8438@154
+2026-05-22 06:59:34,017 [INFO]   Epoch  300/500  α=1.00  dom=22.1807  proto=0.0000  val_AUC=0.5833  best=0.8455@292
+2026-05-22 07:00:11,214 [INFO]   Epoch  400/500  α=1.00  dom=22.1808  proto=0.0000  val_AUC=0.7431  best=0.8646@358
+2026-05-22 07:00:53,611 [INFO]   Epoch  500/500  α=1.00  dom=22.1807  proto=0.0000  val_AUC=0.7674  best=0.8802@492
+2026-05-22 07:00:53,611 [INFO]   Best epoch: 492  val_AUC: 0.8802
+2026-05-22 07:00:53,614 [INFO]   [mic_train [round 4]] AUC: 0.8802  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:00:53,615 [INFO]   ✓ Nuovo best round: 4  AUC=0.8802
+2026-05-22 07:00:53,615 [INFO] 
+  === Round 5/20 ===
+2026-05-22 07:00:53,617 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:00:53,619 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:00:53,619 [INFO] 
+  --- ST round 5 ---
+2026-05-22 07:00:53,619 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:00:54,012 [INFO]   Epoch    1/500  α=0.01  dom=22.1808  proto=0.0002  val_AUC=0.3924  best=0.3924@1
+2026-05-22 07:01:32,738 [INFO]   Epoch  100/500  α=0.76  dom=22.1808  proto=0.0000  val_AUC=0.6094  best=0.8108@93
+2026-05-22 07:02:08,136 [INFO]   Epoch  200/500  α=0.96  dom=22.1807  proto=0.0001  val_AUC=0.3351  best=0.8108@93
+2026-05-22 07:02:23,267 [INFO]   Early stopping a epoch 243
+2026-05-22 07:02:23,268 [INFO]   Best epoch: 93  val_AUC: 0.8108
+2026-05-22 07:02:23,271 [INFO]   [mic_train [round 5]] AUC: 0.8108  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:02:23,271 [INFO]   Round 5: AUC=0.8108  (best: 0.8802)
+2026-05-22 07:02:23,271 [INFO] 
+  === Round 6/20 ===
+2026-05-22 07:02:23,272 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:02:23,275 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:02:23,275 [INFO] 
+  --- ST round 6 ---
+2026-05-22 07:02:23,275 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:02:23,612 [INFO]   Epoch    1/500  α=0.01  dom=22.1808  proto=0.0002  val_AUC=0.5781  best=0.5781@1
+2026-05-22 07:03:01,035 [INFO]   Epoch  100/500  α=0.76  dom=22.1807  proto=0.0000  val_AUC=0.4062  best=0.7378@7
+2026-05-22 07:03:37,204 [INFO]   Epoch  200/500  α=0.96  dom=22.1808  proto=0.0000  val_AUC=0.4826  best=0.7517@155
+2026-05-22 07:04:10,818 [INFO]   Epoch  300/500  α=1.00  dom=22.1806  proto=0.0000  val_AUC=0.5208  best=0.7517@155
+2026-05-22 07:04:12,499 [INFO]   Early stopping a epoch 305
+2026-05-22 07:04:12,499 [INFO]   Best epoch: 155  val_AUC: 0.7517
+2026-05-22 07:04:12,508 [INFO]   [mic_train [round 6]] AUC: 0.7517  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:04:12,508 [INFO]   Round 6: AUC=0.7517  (best: 0.8802)
+2026-05-22 07:04:12,508 [INFO] 
+  === Round 7/20 ===
+2026-05-22 07:04:12,509 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:04:12,518 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:04:12,518 [INFO] 
+  --- ST round 7 ---
+2026-05-22 07:04:12,518 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:04:12,857 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0002  val_AUC=0.6649  best=0.6649@1
+2026-05-22 07:04:45,775 [INFO]   Epoch  100/500  α=0.76  dom=22.1807  proto=0.0000  val_AUC=0.5417  best=0.7118@63
+2026-05-22 07:05:18,594 [INFO]   Epoch  200/500  α=0.96  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.7118@63
+2026-05-22 07:05:22,857 [INFO]   Early stopping a epoch 213
+2026-05-22 07:05:22,857 [INFO]   Best epoch: 63  val_AUC: 0.7118
+2026-05-22 07:05:22,860 [INFO]   [mic_train [round 7]] AUC: 0.7118  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:05:22,860 [INFO]   Round 7: AUC=0.7118  (best: 0.8802)
+2026-05-22 07:05:22,861 [INFO] 
+  === Round 8/20 ===
+2026-05-22 07:05:22,862 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:05:22,865 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:05:22,865 [INFO] 
+  --- ST round 8 ---
+2026-05-22 07:05:22,865 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:05:23,248 [INFO]   Epoch    1/500  α=0.01  dom=22.1808  proto=0.0001  val_AUC=0.4792  best=0.4792@1
+2026-05-22 07:06:23,579 [INFO]   Epoch  100/500  α=0.76  dom=22.1808  proto=0.0000  val_AUC=0.5417  best=0.6250@56
+2026-05-22 07:07:31,157 [INFO]   Epoch  200/500  α=0.96  dom=22.1806  proto=0.0000  val_AUC=0.5000  best=0.6250@56
+2026-05-22 07:07:35,192 [INFO]   Early stopping a epoch 206
+2026-05-22 07:07:35,193 [INFO]   Best epoch: 56  val_AUC: 0.6250
+2026-05-22 07:07:35,196 [INFO]   [mic_train [round 8]] AUC: 0.6250  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:07:35,196 [INFO]   Round 8: AUC=0.6250  (best: 0.8802)
+2026-05-22 07:07:35,196 [INFO] 
+  === Round 9/20 ===
+2026-05-22 07:07:35,197 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:07:35,201 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:07:35,202 [INFO] 
+  --- ST round 9 ---
+2026-05-22 07:07:35,202 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:07:35,571 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:08:26,761 [INFO]   Epoch  100/500  α=0.76  dom=22.1808  proto=0.0000  val_AUC=0.4792  best=0.5833@41
+2026-05-22 07:08:57,785 [INFO]   Early stopping a epoch 191
+2026-05-22 07:08:57,786 [INFO]   Best epoch: 41  val_AUC: 0.5833
+2026-05-22 07:08:57,789 [INFO]   [mic_train [round 9]] AUC: 0.5833  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:08:57,789 [INFO]   Round 9: AUC=0.5833  (best: 0.8802)
+2026-05-22 07:08:57,789 [INFO] 
+  === Round 10/20 ===
+2026-05-22 07:08:57,790 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:08:57,793 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:08:57,793 [INFO] 
+  --- ST round 10 ---
+2026-05-22 07:08:57,793 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:08:58,447 [INFO]   Epoch    1/500  α=0.01  dom=22.1808  proto=0.0000  val_AUC=0.5417  best=0.5417@1
+2026-05-22 07:10:13,637 [INFO]   Epoch  100/500  α=0.76  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.6667@17
+2026-05-22 07:11:08,993 [INFO]   Early stopping a epoch 167
+2026-05-22 07:11:08,993 [INFO]   Best epoch: 17  val_AUC: 0.6667
+2026-05-22 07:11:08,996 [INFO]   [mic_train [round 10]] AUC: 0.6667  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:11:08,997 [INFO]   Round 10: AUC=0.6667  (best: 0.8802)
+2026-05-22 07:11:08,997 [INFO] 
+  === Round 11/20 ===
+2026-05-22 07:11:08,998 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:11:09,000 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:11:09,000 [INFO] 
+  --- ST round 11 ---
+2026-05-22 07:11:09,000 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:11:09,357 [INFO]   Epoch    1/500  α=0.01  dom=22.1809  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:12:13,774 [INFO]   Epoch  100/500  α=0.76  dom=22.1805  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:12:47,062 [INFO]   Early stopping a epoch 151
+2026-05-22 07:12:47,062 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:12:47,065 [INFO]   [mic_train [round 11]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:12:47,065 [INFO]   Round 11: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:12:47,065 [INFO] 
+  === Round 12/20 ===
+2026-05-22 07:12:47,067 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:12:47,069 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:12:47,069 [INFO] 
+  --- ST round 12 ---
+2026-05-22 07:12:47,069 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:12:47,725 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:13:52,637 [INFO]   Epoch  100/500  α=0.76  dom=22.1808  proto=-0.0000  val_AUC=0.5000  best=0.5417@3
+2026-05-22 07:14:27,170 [INFO]   Early stopping a epoch 153
+2026-05-22 07:14:27,170 [INFO]   Best epoch: 3  val_AUC: 0.5417
+2026-05-22 07:14:27,173 [INFO]   [mic_train [round 12]] AUC: 0.5417  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:14:27,173 [INFO]   Round 12: AUC=0.5417  (best: 0.8802)
+2026-05-22 07:14:27,173 [INFO] 
+  === Round 13/20 ===
+2026-05-22 07:14:27,174 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:14:27,177 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:14:27,177 [INFO] 
+  --- ST round 13 ---
+2026-05-22 07:14:27,177 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:14:27,566 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5208  best=0.5208@1
+2026-05-22 07:15:02,026 [INFO]   Epoch  100/500  α=0.76  dom=22.1808  proto=0.0000  val_AUC=0.5000  best=0.5208@1
+2026-05-22 07:15:19,604 [INFO]   Early stopping a epoch 151
+2026-05-22 07:15:19,604 [INFO]   Best epoch: 1  val_AUC: 0.5208
+2026-05-22 07:15:19,607 [INFO]   [mic_train [round 13]] AUC: 0.5208  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:15:19,607 [INFO]   Round 13: AUC=0.5208  (best: 0.8802)
+2026-05-22 07:15:19,607 [INFO] 
+  === Round 14/20 ===
+2026-05-22 07:15:19,608 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:15:19,611 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:15:19,611 [INFO] 
+  --- ST round 14 ---
+2026-05-22 07:15:19,611 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:15:19,951 [INFO]   Epoch    1/500  α=0.01  dom=22.1806  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:15:54,535 [INFO]   Epoch  100/500  α=0.76  dom=22.1808  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:16:12,208 [INFO]   Early stopping a epoch 151
+2026-05-22 07:16:12,209 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:16:12,217 [INFO]   [mic_train [round 14]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:16:12,218 [INFO]   Round 14: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:16:12,218 [INFO] 
+  === Round 15/20 ===
+2026-05-22 07:16:12,219 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:16:12,227 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:16:12,227 [INFO] 
+  --- ST round 15 ---
+2026-05-22 07:16:12,227 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:16:12,563 [INFO]   Epoch    1/500  α=0.01  dom=22.1808  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:16:46,037 [INFO]   Epoch  100/500  α=0.76  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:17:03,067 [INFO]   Early stopping a epoch 151
+2026-05-22 07:17:03,068 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:17:03,071 [INFO]   [mic_train [round 15]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:17:03,071 [INFO]   Round 15: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:17:03,071 [INFO] 
+  === Round 16/20 ===
+2026-05-22 07:17:03,072 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:17:03,075 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:17:03,075 [INFO] 
+  --- ST round 16 ---
+2026-05-22 07:17:03,075 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:17:03,411 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:18:08,703 [INFO]   Epoch  100/500  α=0.76  dom=22.1806  proto=-0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:18:42,446 [INFO]   Early stopping a epoch 151
+2026-05-22 07:18:42,446 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:18:42,449 [INFO]   [mic_train [round 16]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:18:42,449 [INFO]   Round 16: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:18:42,449 [INFO] 
+  === Round 17/20 ===
+2026-05-22 07:18:42,451 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:18:42,453 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:18:42,453 [INFO] 
+  --- ST round 17 ---
+2026-05-22 07:18:42,453 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:18:42,795 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:19:20,482 [INFO]   Epoch  100/500  α=0.76  dom=22.1809  proto=-0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:19:39,929 [INFO]   Early stopping a epoch 151
+2026-05-22 07:19:39,930 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:19:39,933 [INFO]   [mic_train [round 17]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:19:39,933 [INFO]   Round 17: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:19:39,933 [INFO] 
+  === Round 18/20 ===
+2026-05-22 07:19:39,934 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:19:39,942 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:19:39,942 [INFO] 
+  --- ST round 18 ---
+2026-05-22 07:19:39,942 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:19:40,278 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:20:13,601 [INFO]   Epoch  100/500  α=0.76  dom=22.1805  proto=-0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:20:30,720 [INFO]   Early stopping a epoch 151
+2026-05-22 07:20:30,720 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:20:30,728 [INFO]   [mic_train [round 18]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:20:30,728 [INFO]   Round 18: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:20:30,728 [INFO] 
+  === Round 19/20 ===
+2026-05-22 07:20:30,729 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:20:30,732 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:20:30,732 [INFO] 
+  --- ST round 19 ---
+2026-05-22 07:20:30,732 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:20:31,366 [INFO]   Epoch    1/500  α=0.01  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:21:05,729 [INFO]   Epoch  100/500  α=0.76  dom=22.1807  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:21:23,338 [INFO]   Early stopping a epoch 151
+2026-05-22 07:21:23,338 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:21:23,341 [INFO]   [mic_train [round 19]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:21:23,341 [INFO]   Round 19: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:21:23,342 [INFO] 
+  === Round 20/20 ===
+2026-05-22 07:21:23,343 [INFO]   Candidati mic responder: 14  score range: [1.000, 1.000]
+2026-05-22 07:21:23,351 [INFO]   Combined: (525, 16622)  R: 512
+2026-05-22 07:21:23,351 [INFO] 
+  --- ST round 20 ---
+2026-05-22 07:21:23,351 [INFO]   RNA responder train: (525, 16622)  R: 512  NR: 13
+2026-05-22 07:21:23,694 [INFO]   Epoch    1/500  α=0.01  dom=22.1808  proto=0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:22:00,017 [INFO]   Epoch  100/500  α=0.76  dom=22.1807  proto=-0.0000  val_AUC=0.5000  best=0.5000@1
+2026-05-22 07:22:18,444 [INFO]   Early stopping a epoch 151
+2026-05-22 07:22:18,444 [INFO]   Best epoch: 1  val_AUC: 0.5000
+2026-05-22 07:22:18,447 [INFO]   [mic_train [round 20]] AUC: 0.5000  score_R: 1.000  score_NR: 1.000
+2026-05-22 07:22:18,447 [INFO]   Round 20: AUC=0.5000  (best: 0.8802)
+2026-05-22 07:22:18,447 [INFO] 
+Best round: 4  train_AUC: 0.8802
+2026-05-22 07:22:18,475 [INFO] 
+============================================================
+2026-05-22 07:22:18,475 [INFO] VALUTAZIONE FINALE — test set (23 campioni, UNA SOLA VOLTA)
+2026-05-22 07:22:18,475 [INFO] ============================================================
+2026-05-22 07:22:19,344 [INFO] 
+  AUC point estimate : 0.5196
+2026-05-22 07:22:19,344 [INFO]   95% CI bootstrap   : [0.2535, 0.7946]
+2026-05-22 07:22:19,344 [INFO]   N test             : 23  (6 NR, 17 R)
+2026-05-22 07:22:19,344 [INFO] 
+  Score medio R  (test): 1.0000 ± 0.0000
+2026-05-22 07:22:19,345 [INFO]   Score medio NR (test): 1.0000 ± 0.0000
+2026-05-22 07:22:19,345 [INFO] 
+  --- Soglia fissa 0.5 ---
+2026-05-22 07:22:19,347 [INFO] 
+              precision    recall  f1-score   support
+
+          NR       0.00      0.00      0.00         6
+           R       0.74      1.00      0.85        17
+
+    accuracy                           0.74        23
+   macro avg       0.37      0.50      0.42        23
+weighted avg       0.55      0.74      0.63        23
+
+Traceback (most recent call last):
+  File "/home/jovyan/work/shared/cml_dann/scripts/04_train.py", line 681, in <module>
+    main()
+  File "/home/jovyan/work/shared/cml_dann/scripts/04_train.py", line 647, in main
+    test_results = evaluate_final(
+                   ^^^^^^^^^^^^^^^
+  File "/home/jovyan/work/shared/cml_dann/scripts/04_train.py", line 496, in evaluate_final
+    thr, sens, spec = youden_threshold(scores_calib, scores_calib)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/work/shared/cml_dann/scripts/04_train.py", line 451, in youden_threshold
+    fpr, tpr, thresholds = roc_curve(y_true, y_score)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/sklearn/metrics/_ranking.py", line 1258, in roc_curve
+    _, fps, _, tps, thresholds = confusion_matrix_at_thresholds(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/sklearn/utils/_param_validation.py", line 191, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.11/site-packages/sklearn/metrics/_ranking.py", line 926, in confusion_matrix_at_thresholds
+    raise ValueError("{0} format is not supported".format(y_type))
+ValueError: continuous format is not supported

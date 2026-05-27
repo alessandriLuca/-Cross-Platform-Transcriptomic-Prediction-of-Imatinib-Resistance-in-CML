@@ -1,0 +1,4 @@
+Modello,AUC,CI 2.5%,CI 97.5%
+ProtoDANN (nostro modello),0.8627,0.6029,1.0000
+Logistic Regression LASSO,0.5686,0.1905,0.9290
+Random Forest,0.6373,0.2826,0.9444

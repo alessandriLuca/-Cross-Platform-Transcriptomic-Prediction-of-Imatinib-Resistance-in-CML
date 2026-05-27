@@ -1,0 +1,12 @@
+{
+  "auc_observed": 0.8627450980392157,
+  "auc_perm_mean": 0.4975843137254902,
+  "auc_perm_std": 0.14143212385933326,
+  "auc_perm_95pct": 0.7254901960784315,
+  "p_value": 0.0038,
+  "n_permutations": 10000,
+  "n_test": 23,
+  "n_NR": 6,
+  "n_R": 17,
+  "significant_005": true
+}

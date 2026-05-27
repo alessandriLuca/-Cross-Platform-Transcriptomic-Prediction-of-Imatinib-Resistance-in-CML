@@ -1,0 +1,295 @@
+{
+  "approach": "DANN + Responder Prototype (cosine similarity score)",
+  "best_round": 3,
+  "best_train_auc": 0.8125,
+  "round_history": [
+    {
+      "round": 0,
+      "train_auc": 0.6284722222222222,
+      "score_range": 0.03966039419174194,
+      "is_best": true
+    },
+    {
+      "round": 1,
+      "train_auc": 0.7430555555555557,
+      "score_range": 0.060557425022125244,
+      "is_degenerate": false,
+      "is_best": true
+    },
+    {
+      "round": 2,
+      "train_auc": 0.7465277777777778,
+      "score_range": 0.06041824817657471,
+      "is_degenerate": false,
+      "is_best": true
+    },
+    {
+      "round": 3,
+      "train_auc": 0.8125,
+      "score_range": 0.026926815509796143,
+      "is_degenerate": false,
+      "is_best": true
+    },
+    {
+      "round": 4,
+      "train_auc": 0.8802083333333334,
+      "score_range": 6.377696990966797e-06,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 5,
+      "train_auc": 0.8107638888888888,
+      "score_range": 9.5367431640625e-07,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 6,
+      "train_auc": 0.7517361111111112,
+      "score_range": 1.9073486328125e-06,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 7,
+      "train_auc": 0.7118055555555555,
+      "score_range": 1.1920928955078125e-07,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 8,
+      "train_auc": 0.625,
+      "score_range": 5.960464477539063e-08,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 9,
+      "train_auc": 0.5833333333333333,
+      "score_range": 5.960464477539063e-08,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 10,
+      "train_auc": 0.6666666666666667,
+      "score_range": 5.960464477539063e-08,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 11,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 12,
+      "train_auc": 0.5416666666666667,
+      "score_range": 5.960464477539063e-08,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 13,
+      "train_auc": 0.5208333333333334,
+      "score_range": 5.960464477539063e-08,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 14,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 15,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 16,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 17,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 18,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 19,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    },
+    {
+      "round": 20,
+      "train_auc": 0.5,
+      "score_range": 0.0,
+      "is_degenerate": true,
+      "is_best": false
+    }
+  ],
+  "auc": 0.8627450980392157,
+  "ci_low": 0.602857142857143,
+  "ci_high": 1.0,
+  "ci_level": "95%",
+  "n_bootstrap": 2000,
+  "score_R_mean": 0.998522162437439,
+  "score_NR_mean": 0.9855291247367859,
+  "scores_test": [
+    0.9618290066719055,
+    0.9621220827102661,
+    0.9990450739860535,
+    0.9977247714996338,
+    0.996048092842102,
+    0.9964056611061096,
+    0.9980438351631165,
+    0.996930718421936,
+    0.9993045926094055,
+    0.9990221858024597,
+    0.9986822605133057,
+    0.9988687038421631,
+    0.9992547035217285,
+    0.9980090260505676,
+    0.9991130828857422,
+    0.9981763958930969,
+    0.9983935356140137,
+    0.9984438419342041,
+    0.9989558458328247,
+    0.9991654753684998,
+    0.9976232051849365,
+    0.9990638494491577,
+    0.9978265762329102
+  ],
+  "labels_test": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "threshold_05": {
+    "threshold": 0.5,
+    "preds": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "threshold_youden": {
+    "threshold": 0.9998162984848022,
+    "preds": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "config": {
+    "input_dropout": 0.5,
+    "latent_dim": 64,
+    "encoder_hidden": [
+      256
+    ],
+    "dropout": 0.4,
+    "pretrain_epochs": 500,
+    "pretrain_lr": 0.001,
+    "pretrain_wd": 1e-05,
+    "dann_epochs": 1000,
+    "dann_lr": 5e-05,
+    "dann_wd": 0.0001,
+    "lambda_max": 1.0,
+    "patience": 150,
+    "alpha_proto": 0.5,
+    "self_train_rounds": 20,
+    "self_train_epochs": 500,
+    "self_train_top_k_frac": 0.4,
+    "score_range_min": 0.01,
+    "n_aug_copies": 5,
+    "aug_noise_std": 0.05,
+    "batch_size": 16,
+    "seed": 42,
+    "n_bootstrap": 2000,
+    "ci_alpha": 0.05
+  },
+  "n_genes": 16622,
+  "test_set": "GSE14671 Validation Set (23 campioni, mai visti durante training)"
+}
